@@ -1,0 +1,49 @@
+/* Tailwind CSS v4 — utilities are used directly in the JSX.
+   This file only sets the theme, dark mode and a few reusable component classes. */
+@import "tailwindcss";
+
+/* ThemeContext sets <html data-theme="dark">, so `dark:` follows it */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --font-sans: "Google Sans", ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html { color-scheme: light; }
+  html[data-theme="dark"] { color-scheme: dark; }
+  body {
+    @apply bg-zinc-50 font-sans text-zinc-900 antialiased transition-colors dark:bg-zinc-950 dark:text-zinc-100;
+  }
+  h1, h2, h3 { @apply font-semibold tracking-tight; }
+  code { @apply rounded-md bg-zinc-100 px-1.5 py-0.5 text-[0.85em] dark:bg-zinc-800; }
+}
+
+/* Small set of reusable classes built with @apply */
+@layer components {
+  .btn {
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium
+      transition active:scale-[0.98] disabled:pointer-events-none disabled:opacity-60
+      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-violet-500;
+  }
+  .btn-primary { @apply bg-violet-600 text-white shadow-sm shadow-violet-600/25 hover:bg-violet-700; }
+  .btn-secondary {
+    @apply bg-white text-zinc-900 ring-1 ring-zinc-200 hover:bg-zinc-50
+      dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-800 dark:hover:bg-zinc-800;
+  }
+  .btn-ghost { @apply text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white; }
+  .btn-danger { @apply bg-red-600 text-white hover:bg-red-700; }
+  .icon-btn {
+    @apply grid size-9 cursor-pointer place-items-center rounded-xl text-zinc-600 ring-1 ring-zinc-200 transition
+      hover:bg-zinc-100 hover:text-zinc-900 disabled:opacity-40
+      dark:text-zinc-300 dark:ring-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-white;
+  }
+  .card { @apply rounded-2xl bg-white ring-1 ring-zinc-200/80 dark:bg-zinc-900 dark:ring-zinc-800; }
+  .input {
+    @apply w-full rounded-xl bg-white px-3.5 py-2.5 text-sm text-zinc-900 ring-1 ring-zinc-200 transition
+      placeholder:text-zinc-400 focus:ring-2 focus:ring-violet-500 focus:outline-none
+      aria-[invalid=true]:ring-red-500
+      dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-800;
+  }
+  .muted { @apply text-zinc-500 dark:text-zinc-400; }
+}
